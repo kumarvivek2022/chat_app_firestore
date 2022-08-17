@@ -1,12 +1,11 @@
 import 'package:chatapp/helper/authenticate.dart';
 import 'package:chatapp/helper/helperfunctions.dart';
-import 'package:chatapp/views/chatrooms.dart';
+import 'package:chatapp/widget/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
-
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
@@ -43,7 +42,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: "OverpassRegular",
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: userIsLoggedIn != null ?  userIsLoggedIn ? ChatRoom() : Authenticate()
+      home: userIsLoggedIn != null ?  userIsLoggedIn ? CustomBottomNavigationBar() : Authenticate()
           : Container(
         child: Center(
           child: Authenticate(),

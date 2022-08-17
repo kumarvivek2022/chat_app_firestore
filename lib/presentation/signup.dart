@@ -3,7 +3,7 @@ import 'package:chatapp/helper/helperfunctions.dart';
 import 'package:chatapp/services/auth.dart';
 import 'package:chatapp/services/database.dart';
 import 'package:chatapp/widget/custom_bottom_navigation_bar.dart';
-import 'package:chatapp/widget/widget.dart';
+import 'package:chatapp/widget/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
     });
     Map<String, String> userDataMap = {
       "userName": phoneEditingController.text,
-      "userEmail": phoneEditingController.text
+      "userPhone": phoneEditingController.text
     };
 
     databaseMethods.addUserInfo(userDataMap);
@@ -128,7 +128,8 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
         body: isLoading
             ? Container(
-                child: Center(child: CircularProgressIndicator()),
+                child: Center(
+                    child: CircularProgressIndicator()),
               )
             : Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
@@ -143,36 +144,10 @@ class _SignUpState extends State<SignUp> {
                             ),
                             Form(
                               key: formKey,
-                              child: TextFormField(
+                              child: CustomTextField(
+                                hintText: "phone Number",
                                 controller: phoneEditingController,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey.withOpacity(0.9), width: 1.0),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  //filled: true,
-                                  hintStyle: TextStyle(color: Colors.grey[800]),
-                                  hintText: 'Phone Number',
-                                  errorStyle: const TextStyle(color: Colors.white),
-                                  fillColor: Colors.grey.withOpacity(0.2),
-                                ),
-                                style: TextStyle(color: Colors.grey.withOpacity(0.9)),
-                              ),
+                              )
                             ),
                             SizedBox(
                               height: 25,
@@ -214,37 +189,10 @@ class _SignUpState extends State<SignUp> {
                             key: formKey2,
                             child: Column(
                               children: [
-                                TextFormField(
-                                  controller: otpController,
-                              decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey.withOpacity(0.9), width: 1.0),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                //filled: true,
-                                hintStyle: TextStyle(color: Colors.grey[800]),
-                                hintText: 'Enter Otp',
-                                errorStyle: const TextStyle(color: Colors.white),
-                                fillColor: Colors.grey.withOpacity(0.2),
+                              CustomTextField(
+                                hintText: "Enter Otp",
+                                controller: otpController,
                               ),
-                              style: TextStyle(color: Colors.grey.withOpacity(0.9)),
-
-                                ),
                                 SizedBox(
                                   height: 16,
                                 ),
@@ -270,7 +218,6 @@ class _SignUpState extends State<SignUp> {
                                     width: MediaQuery.of(context).size.width,
                                     child: Text(
                                       "Confirm",
-                                      style: biggerTextStyle(),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),

@@ -1,8 +1,6 @@
 import 'package:chatapp/helper/constants.dart';
-import 'package:chatapp/models/user.dart';
 import 'package:chatapp/services/database.dart';
-import 'package:chatapp/views/chat.dart';
-import 'package:chatapp/widget/widget.dart';
+import 'package:chatapp/presentation/chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -38,15 +36,17 @@ class _SearchState extends State<Search> {
   }
 
   Widget userList(){
-    return haveUserSearched ? ListView.builder(
-      shrinkWrap: true,
-      itemCount: searchResultSnapshot.documents.length,
-        itemBuilder: (context, index){
-        return userTile(
-          searchResultSnapshot.documents[index].data["userName"],
-          searchResultSnapshot.documents[index].data["userEmail"],
-        );
-        }) : Container();
+    return haveUserSearched ? Expanded(
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: searchResultSnapshot.documents.length,
+          itemBuilder: (context, index){
+            return userTile(
+              searchResultSnapshot.documents[index].data["userName"].toString(),
+              searchResultSnapshot.documents[index].data["userEmail"].toString(),
+            );
+          }),
+    ) : Container();
   }
 
   /// 1.create a chatroom, send user to the chatroom, other userdetails
@@ -81,14 +81,14 @@ class _SearchState extends State<Search> {
               Text(
                 userName,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),
               ),
               Text(
                 userEmail,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),
               )
@@ -136,7 +136,25 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMain(context),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.topLeft,
+                  colors: [
+                    Color.fromARGB(225, 157, 112, 229),
+                    Colors.blue,
+                  ])),
+        ),
+
+        title: Center(child: Center(
+            child: Text("Search User",style: TextStyle(fontSize: 25),))),
+        elevation: 0.0,
+        centerTitle: false,
+
+      ),
       body: isLoading ? Container(
         child: Center(
           child: CircularProgressIndicator(),
@@ -146,13 +164,12 @@ class _SearchState extends State<Search> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              color: Color(0x54FFFFFF),
+              color: Colors.orangeAccent.withOpacity(0.9),
               child: Row(
                 children: [
                   Expanded(
                     child: TextField(
                       controller: searchEditingController,
-                      style: simpleTextStyle(),
                       decoration: InputDecoration(
                         hintText: "search username ...",
                         hintStyle: TextStyle(
@@ -182,9 +199,9 @@ class _SearchState extends State<Search> {
                           borderRadius: BorderRadius.circular(40)
                         ),
                         padding: EdgeInsets.all(12),
-                        child: Image.asset("assets/images/search_white.png",
-                          height: 25, width: 25,)),
-                  )
+                        child: Icon(Icons.search)
+                          )),
+
                 ],
               ),
             ),

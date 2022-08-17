@@ -1,10 +1,9 @@
-import 'package:chatapp/views/signup.dart';
+import 'package:chatapp/presentation/signup.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  final Function toggleView;
 
-  WelcomeScreen(this.toggleView);
+  WelcomeScreen();
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();

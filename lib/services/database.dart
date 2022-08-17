@@ -34,7 +34,7 @@ class DatabaseMethods {
     });
   }
 
-  getChats(String chatRoomId) async{
+  dynamic getChats(String chatRoomId) async{
     return Firestore.instance
         .collection("chatRoom")
         .document(chatRoomId)

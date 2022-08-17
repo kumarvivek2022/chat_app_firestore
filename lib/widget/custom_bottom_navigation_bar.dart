@@ -1,12 +1,15 @@
-import 'package:chat_application_firebase/presentation/screen/call_screen.dart';
-import 'package:chat_application_firebase/presentation/screen/chat_screen.dart';
-import 'package:chat_application_firebase/presentation/screen/contact_screen.dart';
-import 'package:chat_application_firebase/presentation/screen/profile_screen.dart';
-import 'package:chat_application_firebase/presentation/screen/story_screen.dart';
+
+import 'package:chatapp/presentation/call_screen.dart';
+import 'package:chatapp/presentation/chatrooms.dart';
+import 'package:chatapp/presentation/contact_screen.dart';
+import 'package:chatapp/presentation/profile_screen.dart';
+import 'package:chatapp/presentation/story_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../presentation/chat.dart';
+
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({Key? key}) : super(key: key);
+  const CustomBottomNavigationBar({Key key}) : super(key: key);
 
   @override
   State<CustomBottomNavigationBar> createState() =>
@@ -16,11 +19,11 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex = 0;
   final List pages = [
-    const ChatScreen(),
-    const CallScreen(),
-    const StoryScreen(),
-    const ContactScreen(),
-    const ProfileScreen(),
+    ChatRoom(),
+    Call(),
+    Story(),
+    Contact(),
+    Profile(),
   ];
 
   void onTap(int index) {
@@ -50,7 +53,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             label: 'call',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt),
+            icon: Icon(Icons.camera_alt_outlined),
             label: 'story',
           ),
           BottomNavigationBarItem(

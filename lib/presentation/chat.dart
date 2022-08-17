@@ -66,8 +66,51 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: 50,
+                width: 260,
+                child: TextField(
+                  controller: messageEditingController,
+                  decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.emoji_emotions),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 3, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 3, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+
+                    suffixIcon: IconButton(
+                        onPressed: (){
+                          addMessage();
+                        },
+                        icon: Icon(Icons.send)),
+                      hintText: "Message ...",
+                      hintStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                      border: InputBorder.none
+                  ),
+                ),
+              ),
+              Icon(Icons.camera_alt),
+              Icon(Icons.photo_library_outlined),
+              Icon(Icons.add_circle,color: Color(0xFF6186e6),),
+            ],
+          ),
+      ),
       appBar: appBarMain(context),
       body: Container(
+        height: MediaQuery.of(context).size.height - 180,
         child: Stack(
           children: [
             chatMessages(),
@@ -76,50 +119,6 @@ class _ChatState extends State<Chat> {
                   .of(context)
                   .size
                   .width,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                color: Color(0x54FFFFFF),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: TextField(
-                          controller: messageEditingController,
-                          style: simpleTextStyle(),
-                          decoration: InputDecoration(
-                              hintText: "Message ...",
-                              hintStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                              border: InputBorder.none
-                          ),
-                        )),
-                    SizedBox(width: 16,),
-                    GestureDetector(
-                      onTap: () {
-                        addMessage();
-                      },
-                      child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                    const Color(0x36FFFFFF),
-                                    const Color(0x0FFFFFFF)
-                                  ],
-                                  begin: FractionalOffset.topLeft,
-                                  end: FractionalOffset.bottomRight
-                              ),
-                              borderRadius: BorderRadius.circular(40)
-                          ),
-                          padding: EdgeInsets.all(12),
-                          child: Image.asset("assets/images/send.png",
-                            height: 25, width: 25,)),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
@@ -163,12 +162,12 @@ class MessageTile extends StatelessWidget {
           bottomRight: Radius.circular(23)),
             gradient: LinearGradient(
               colors: sendByMe ? [
-                const Color(0xff007EF4),
+                const Color(0xba6d4c81),
                 const Color(0xff2A75BC)
               ]
                   : [
                 const Color(0x1AFFFFFF),
-                const Color(0x1AFFFFFF)
+                const Color(0x48BF6666)
               ],
             )
         ),
